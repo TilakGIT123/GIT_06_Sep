@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - name: installing httpd
+      yum:
+        name=httpd state=present
+    - name: starting httpd
+      service:
+        name=httpd state=restarted
+    - name: copying files
+      template:
+        src: /home/ec2-user/index.j2
+        dest: /var/www/html/index.html
